@@ -1,0 +1,26 @@
+<template name="userSubmit">
+  <form class="main form">
+    <div class="form-group {{errorClass 'name'}}">
+      <label class="control-label" for="name">Nom</label>
+      <div class="controls">
+          <input name="name" id="name" type="text" value="" placeholder="Name your user" class="form-control"/>
+          <span class="help-block">{{errorMessage 'name'}}</span>
+      </div>
+    </div>
+    <div class="form-group {{errorClass 'email'}}">
+      <label class="control-label" for="email">email</label>
+      <div class="controls">
+          <input name="email" id="email" type="text" value="" placeholder="email of your user" class="form-control"/>
+          <span class="help-block">{{errorMessage 'email'}}</span>
+      </div>
+    </div>
+    <div class="form-group {{errorClass 'amount'}}">
+      <label class="control-label" for="amount">Nombre de café par jour</label>
+      <div class="controls">
+          <input name="amount" id="amount" type="text" value="" placeholder="nombre de café par jour" class="form-control"/>
+          <span class="help-block">{{errorMessage 'amount'}}</span>
+      </div>
+    </div>
+    <input type="submit" value="Creation" class="btn btn-primary"/>
+  </form>
+</template>

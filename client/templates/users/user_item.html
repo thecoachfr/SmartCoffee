@@ -1,0 +1,12 @@
+<template name="userItem">
+  <div class="user">
+        <div class="user-content">
+            <h3>
+                <a href="{{pathFor 'userEdit'}}">{{name}}</a> <span>{{email}}</span>
+            </h3>
+        </div>
+        <div class="state">{{{state}}}</div>
+        <div class="coffee">{{{coffee}}}</div>
+        {{#if isAdmin}}<a class="edit btn delete" href="#">x</a>{{/if}}
+  </div>
+</template>

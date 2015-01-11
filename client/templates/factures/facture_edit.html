@@ -1,0 +1,51 @@
+<template name="factureEdit">
+  <form class="main form">
+    <div class="form-group">
+        <div class="input-group">
+            <span class="input-group-addon" id="basic-addon1">Mois</span>
+            <input type="text" name="month" id="month" value="{{getDate}}" class="form-control" aria-describedby="basic-addon1" readonly >
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="input-group">
+            <span class="input-group-addon" id="basic-addon1">€</span>
+            <input type="text" name="amount" id="amount" value="{{getSums.totals}}" class="form-control" aria-describedby="basic-addon1" readonly >
+        </div>
+    </div>
+      <div class="facture">
+        <table class="table">
+            <thead>
+                <tr>
+                  <th>Name</th>
+                  <th># café</th>
+                  <th>Dettes</th>
+                  <th>Montant</th>
+                  <th>Total</th>
+                  <th>Paiement</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                {{#each lines}}
+                    {{> factureLine}}
+                {{/each}}
+              </tbody>
+              <tfoot>
+                  <tr>
+                      <td>Total</td>
+                      <td>{{getSums.coffees}}</td>
+                      <td>{{getSums.deltas}} €</td>
+                      <td>{{getSums.amounts}} €</td>
+                      <td>{{getSums.totals}} €</td>
+                      <td></td>
+                      <td></td>
+                  </tr>
+              </tfoot>
+        </table>
+    </div>
+
+      <a class="btn btn-warning sendEmail">Envois des emails</a>
+      <a class="btn btn-primary closeBill">Fermer la facture</a>
+      <a class="btn btn-danger delete" href="#">Suppression de la facture</a>
+  </form>
+</template>

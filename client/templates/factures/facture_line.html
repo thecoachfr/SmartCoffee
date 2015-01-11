@@ -1,0 +1,20 @@
+<template name="factureLine">
+    <tr>
+        <td>{{theUserName}}</td>
+        <td>{{coffee}}</td>
+        <td>{{theDelta}} €</td>
+        <td>{{theAmount}} €</td>
+        <td>{{theTotal}} €</td>
+        <td>
+            <div class="input-group">
+                <span>
+                    <input name="paid" value="{{_id}}" type="checkbox" {{isChecked}}>
+                </span>
+                <input id="{{_id}}" type="text" name="payement" value="{{thePayement}}" {{isPaid}} />
+            </div>     
+        </td>
+        <td>{{{paid}}}</td>
+    </tr>
+</template>
+
+

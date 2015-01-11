@@ -1,0 +1,13 @@
+<template name="factureItem">
+  <div class="facture">
+    <div class="facture-content">
+        <h3>
+            <a href="{{pathFor 'factureEdit'}}">{{getDate}}</a>
+            <span>Montant: {{getSums.totals}} €</span>  
+        </h3>  
+    </div>
+    <div class="state">
+        <span >{{{getState}}}</span>
+    </div>
+  </div>
+</template>
