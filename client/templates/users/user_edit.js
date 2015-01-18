@@ -25,11 +25,9 @@ Template.userEdit.events({
         name: $(e.target).find('[name=name]').val(), 
         email: $(e.target).find('[name=email]').val(), 
         amount: parseInt($(e.target).find('[name=amount]').val()),
-        killed: parseInt($(e.target).find('[name=killed]').val())
+        killed: $(e.target).find('[name=killed]').is(':checked')
     }
 
-
-    
     var errors = validateUser(UserProperties); 
     if (errors.name || errors.amount || errors.email)
         return Session.set('userEditErrors', errors);

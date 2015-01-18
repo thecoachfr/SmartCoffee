@@ -1,6 +1,7 @@
 
 var decemberBill;
 
+/*
 if (Factures.find().count() === 0) {
     decemberBill = Factures.insert({
         timestamp: new Date(2014, 11),
@@ -331,5 +332,5 @@ if (CoffeeUsers.find().count() === 0) {
     }); 
  });
 }
-
+*/
 

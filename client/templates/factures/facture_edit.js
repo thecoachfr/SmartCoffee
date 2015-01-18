@@ -1,5 +1,6 @@
 Template.factureEdit.created = function() { 
     Session.set('factureEditErrors', {});
+    Session.set('user_search', null);
 }
 
 Template.factureEdit.helpers({ 
@@ -9,7 +10,30 @@ Template.factureEdit.helpers({
         return !!Session.get('factureEditErrors')[field] ? 'has-error' : '';
     },
     lines: function() {
-        return Lines.find({ factureId: this._id });
+        var lines = Lines.find({ factureId: this._id }, 
+                               { transform: function(userLine) {
+            var user = CoffeeUsers.findOne({ _id: userLine.coffeeUserId});
+            var newUserLine = _.extend(userLine, { name: user.name, firstname: user.firstname});                                                  
+            return newUserLine;                                           
+        }});
+        var array;
+        if (Session.get('user_search')) {
+            var theSearch = Session.get('user_search').toLowerCase();
+            var filter = new Array();
+            lines.map(function(line, cpt) {
+                if (line.name.toLowerCase().match(theSearch) || line.firstname.toLowerCase().match(theSearch)) {
+                    filter.push(line);
+                } 
+            });
+            array = filter;
+        } else {
+            array = lines.fetch();
+        }
+        return array.sort(function(a,b) { 
+            if (a.name < b.name) return -1;
+            if (a.name > b.name) return 1;
+            return 0;
+        });;
     },
     getSums: function() {
         var amounts = 0.0;
@@ -33,6 +57,17 @@ Template.factureEdit.helpers({
 });
 
 Template.factureEdit.events({ 
+     'keyup #nameSearchInput': function(evt,tmpl){
+        try{
+            Session.set('user_search', $('#nameSearchInput').val());
+            Meteor.flush();
+        }catch(err){
+            console.log(err);
+        }
+    },
+    'click #nameSearchInput':function(){
+        Session.set('selected_word', '');
+    },
     'submit form': function(e) {
         e.preventDefault();
 
