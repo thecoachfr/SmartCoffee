@@ -1,3 +1,4 @@
+
 Template.factureItem.helpers({ 
     getDate: function() {
         return moment(this.timestamp).format("MMMM YYYY");
@@ -11,15 +12,26 @@ Template.factureItem.helpers({
     getSums: function() {
         var amounts = 0.0;
         var deltas = 0.0;
+        var count = 0;
+        var paidCount = 0;
         Lines.find({ factureId: this._id }).map(function(e) {
             amounts += e.amount;
             deltas += e.delta;
+            count++;
+            if (e.paid)
+                paidCount++;
         });
         return { 
-            totals: (deltas + amounts).toFixed(2)
+            totals: (deltas + amounts).toFixed(2),
+            count: count,
+            paidCount: paidCount,
+            complete: Math.round(paidCount*100/count,0)
         };
     },
-    getState: function() {
-        return (this.state == 1)?"<span class='label label-warning'>Ouverte</span>":"<span class='label label-primary'>Payée</span>";
+    getStateText: function() {
+        return (this.state == 1)?"Ouverte":"Payée";
+    },
+    getStateColor: function() {
+        return (this.state == 1)?"red":"teal";
     }
 });

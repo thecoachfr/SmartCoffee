@@ -25,7 +25,10 @@ Template.factureLine.helpers({
         return (this.payement == null)?0.0.toFixed(2):(this.payement).toFixed(2); 
     },
     paid: function() {
-        return this.paid?"<span class='label label-primary status'>Payé</span>":"<span class='label label-danger status'>Non Payé</span> (" + this.reminder + " rappel(s) envoyé(s))";
+        return this.paid?"<i class='checkmark icon'></i> Payé":"" + this.reminder + " rappel(s) envoyé(s)";
+    },
+    paidClass: function() {
+        return this.paid?"positive":"negative";
     }
 });
 

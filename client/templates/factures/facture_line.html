@@ -1,19 +1,19 @@
 <template name="factureLine">
-    <tr>
+    <tr >
         <td>{{theUserName}}</td>
-        <td>{{coffee}}</td>
-        <td>{{theDelta}} €</td>
-        <td>{{theAmount}} €</td>
-        <td>{{theTotal}} €</td>
+        <td class="right aligned">{{coffee}}</td>
+        <td class="right aligned">{{theDelta}} €</td>
+        <td class="right aligned">{{theAmount}} €</td>
+        <td class="right aligned"><b>{{theTotal}} €</b></td>
         <td>
-            <div class="input-group">
-                <span>
-                    <input name="paid" value="{{_id}}" type="checkbox" {{isChecked}}>
-                </span>
+            <div class="ui small left action input">
+                <div class="ui teal icon button">
+                    <i class="euro icon"></i>
+                </div>
                 <input id="{{_id}}" type="text" name="payement" value="{{thePayement}}" {{isPaid}} />
             </div>     
         </td>
-        <td>{{{paid}}}</td>
+        <td class="{{paidClass}}">{{{paid}}}</td>
     </tr>
 </template>
 

@@ -25,7 +25,10 @@ Template.factureUserLine.helpers({
         return (this.payement == null)?0.0.toFixed(2):(this.payement).toFixed(2); 
     },
     paid: function() {
-        return this.paid?"<span class='label label-primary'>Payé</span>":"<span class='label label-danger'>Non Payé</span>";
+        return this.paid?"<span class='positive'>Payé</span>":"<span class='negative'>Non Payé</span>";
+    },
+    paidClass: function() {
+        return this.paid?"positive":"negative";
     }
 });
 

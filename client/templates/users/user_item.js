@@ -7,7 +7,7 @@ Template.userItem.helpers({
         return 'désactivé';
     },
     state: function() {
-        return (this.killed == 0)?"<span class='label label-primary'>Actif</span>":"<span class='label label-info'>désactivé</span>";
+        return (this.killed == 0)?"<i class='blue flag icon'></i>":"<i class='red flag icon'></i>";
     },
     coffee: function() {
         return "<span class='badge'>" + this.amount + " café(s)/jour</span>";

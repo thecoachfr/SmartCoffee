@@ -17,17 +17,18 @@ Template.userEdit.helpers({
 });
 
 Template.userEdit.events({ 
-'submit form': function(e) {
+'click .ui.submit': function(e) {
     e.preventDefault();
     
     var currentUserId = this._id;
     var UserProperties = {
-        name: $(e.target).find('[name=name]').val(), 
-        email: $(e.target).find('[name=email]').val(), 
-        amount: parseInt($(e.target).find('[name=amount]').val()),
-        killed: $(e.target).find('[name=killed]').is(':checked')
+        name: $('.ui.form').find('[name=name]').val(), 
+        firstname: $('.ui.form').find('[name=firstname]').val(),
+        email: $('.ui.form').find('[name=email]').val(), 
+        amount: parseInt($('.ui.form').find('[name=amount]').val()),
+        killed: $('.ui.form').find('[name=killed]').is(':checked')
     }
-
+    
     var errors = validateUser(UserProperties); 
     if (errors.name || errors.amount || errors.email)
         return Session.set('userEditErrors', errors);

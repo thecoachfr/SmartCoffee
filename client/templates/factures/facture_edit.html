@@ -1,25 +1,32 @@
 <template name="factureEdit">
-  <form class="main form">
-    <div class="form-group">
-        <div class="input-group">
-            <span class="input-group-addon" id="basic-addon1">Mois</span>
-            <input type="text" name="month" id="month" value="{{getDate}}" class="form-control" aria-describedby="basic-addon1" readonly >
+  <div class="segment">
+      <div class="ui two column middle aligned relaxed fitted stackable grid">
+        <div class="column">
+          <div class="ui left action input">
+              <div class="ui teal icon button">
+                <i class="calendar icon"></i>
+              </div>
+              <input type="text" value="{{getDate}}">
+          </div>
         </div>
-    </div>
-    <div class="form-group">
-        <div class="input-group">
-            <span class="input-group-addon" id="basic-addon1">€</span>
-            <input type="text" name="amount" id="amount" value="{{getSums.totals}}" class="form-control" aria-describedby="basic-addon1" readonly >
+        <div class="column">
+          <div class="ui left action input">
+              <div class="ui teal icon button">
+                <i class="euro icon"></i>
+              </div>
+              <input type="text" value="{{getSums.totals}}">
+          </div>
         </div>
-    </div>
-       <div class="form-group">
-        <div class="input-group">
-            <span class="input-group-addon" id="basic-addon1">Name filter</span>
-            <input type="text" name="nameSearchInput" id="nameSearchInput" value="" class="form-control" aria-describedby="basic-addon1" >
+     </div>
+       <div class="ui divider"></div>
+      
+      <div class="segment">
+        <div class="ui left icon input">
+             <i class="users icon"></i>
+            <input type="text" name="nameSearchInput" id="nameSearchInput" placeholder="Rechercher ...">
         </div>
-    </div>
-      <div class="facture">
-        <table class="table">
+
+        <table class="ui celled table">
             <thead>
                 <tr>
                   <th>Name</th>
@@ -37,12 +44,12 @@
                 {{/each}}
               </tbody>
               <tfoot>
-                  <tr>
+                  <tr class="active">
                       <td>Total</td>
-                      <td>{{getSums.coffees}}</td>
-                      <td>{{getSums.deltas}} €</td>
-                      <td>{{getSums.amounts}} €</td>
-                      <td>{{getSums.totals}} €</td>
+                      <td class="right aligned">{{getSums.coffees}}</td>
+                      <td class="right aligned">{{getSums.deltas}} €</td>
+                      <td class="right aligned">{{getSums.amounts}} €</td>
+                      <td class="right aligned"><b>{{getSums.totals}} €</b></td>
                       <td></td>
                       <td></td>
                   </tr>
@@ -50,8 +57,10 @@
         </table>
     </div>
 
-      <a class="btn btn-warning sendEmail">Envois des emails</a>
-      <a class="btn btn-primary closeBill">Fermer la facture</a>
-      <a class="btn btn-danger delete" href="#">Suppression de la facture</a>
-  </form>
+      <div class="ui basic right aligned  segment">
+          <a class="ui green button sendEmail">Envois des emails</a>
+          <a class="ui yellow button closeBill">Fermer la facture</a>
+          <a class="ui right red button delete" href="#">Suppression de la facture</a>
+      </div>
+  </div>
 </template>
