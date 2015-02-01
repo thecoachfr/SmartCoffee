@@ -1,16 +1,16 @@
 <template name="factureItem">
-  <a class="item"  href="{{pathFor 'factureEdit'}}">
-    <div class="content">
-        <div class="header">{{getDate}}</div>
-        <div class="meta">
-           <span class="right floated time">Montant: {{getSums.totals}} €</span>
-        </div>
-        <div class="description">
-            <div class="ui blue label">{{getSums.complete}}%</div> ({{getSums.paidCount}}) sur {{getSums.count}} utilisateurs.
-        </div>
-        <div class="content">
-           <span class="ui right floated {{getStateColor}} label">{{getStateText}}</span>
-        </div>
-    </div>
-  </a>
+	<a class="item"  href="{{pathFor 'factureEdit'}}">
+		<div class="content">
+			<div class="header">{{getDate}}</div>
+			<div class="meta">
+				<span class="right floated time">Montant: {{getSums.totals}} €</span>
+			</div>
+			<div class="description">
+				<div class="ui blue label">{{getSums.complete}}%</div> ({{getSums.paidCount}}) sur {{getSums.count}} utilisateurs.
+			</div>
+			<div class="content">
+				<span class="ui right floated {{getStateColor}} label">{{getStateText}}</span>
+			</div>
+		</div>
+	</a>
 </template>

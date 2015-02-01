@@ -1,0 +1,17 @@
+<template name="factureTableFooter">
+	<tfoot>
+		<tr class="active">
+			<td>Total</td>
+			{{#if isDesktop}}
+			<td class="right aligned">{{getSums.coffees}}</td>
+			<td class="right aligned">{{getSums.deltas}} €</td>
+			<td class="right aligned">{{getSums.amounts}} €</td>
+			{{/if}}
+			<td class="right aligned"><b>{{getSums.totals}} €</b></td>
+			{{#if edit}}
+			<td></td>
+			<td></td>
+			{{/if}}
+		</tr>
+	</tfoot>
+</template>

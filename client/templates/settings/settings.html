@@ -1,0 +1,6 @@
+<template name="settings">
+{{#with lastEntry }}
+ 	 {{> quickForm collection="Settings" doc=this id="updateSettingsForm" type="update" omitFields="timestamp"}}
+{{/with}}
+
+</template>

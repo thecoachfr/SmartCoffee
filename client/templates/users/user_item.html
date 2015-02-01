@@ -1,21 +1,21 @@
 <template name="userItem">
-  <div class="card" >
-    <div class="content">
-        <a class="header" href="{{pathFor 'userEdit'}}">{{name}} {{firstname}}</a>
-        <div class="meta">
-           <span class="email">{{email}}</span>
-        </div>
-       <div class="description">
-             <div class="label"><i class="coffee icon"></i>{{{coffee}}}</div>
-        </div>
-         <a class="ui corner label">
-          {{{state}}}
-        </a>
-           </div>
-  
-        <div class="ui bottom attached red tiny button">
-          <i class="delete icon"></i>
-          Supprimer
-        </div>
- </div>
+	<div class="card" >
+		<div class="content">
+			<a class="header" href="{{pathFor 'userEdit'}}">{{name}} {{firstname}}</a>
+			<div class="meta">
+				<span class="email">{{email}}</span>
+			</div>
+			<div class="description">
+				<div class="label"><i class="coffee icon"></i>{{{coffee}}}</div>
+			</div>
+			<a class="ui corner label">
+				{{{state}}}
+			</a>
+		</div>
+
+		<div class="ui bottom attached red tiny button">
+			<i class="delete icon"></i>
+			Supprimer
+		</div>
+	</div>
 </template>

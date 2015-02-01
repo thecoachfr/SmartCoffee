@@ -1,20 +1,59 @@
 <template name="factureLine">
-    <tr >
-        <td>{{theUserName}}</td>
-        <td class="right aligned">{{coffee}}</td>
-        <td class="right aligned">{{theDelta}} €</td>
-        <td class="right aligned">{{theAmount}} €</td>
-        <td class="right aligned"><b>{{theTotal}} €</b></td>
-        <td>
-            <div class="ui small left action input">
-                <div class="ui teal icon button">
-                    <i class="euro icon"></i>
-                </div>
-                <input id="{{_id}}" type="text" name="payement" value="{{thePayement}}" {{isPaid}} />
-            </div>     
-        </td>
-        <td class="{{paidClass}}">{{{paid}}}</td>
-    </tr>
+	{{#if is "userEdit"}}
+	<tr class="{{paidClass}}">
+		<td>{{theMonth}}</td>
+		<td>{{coffee}}</td>
+		<td>
+			<div class="ui small left action input">
+				<div class="ui teal icon button">
+					<i class="euro icon"></i>
+				</div>
+				<input id="{{_id}}" type="text" name="delta" value="{{theDelta}}" {{isPaid}} />
+			</div>
+		</td>
+		<td>{{theAmount}} €</td>
+		<td>{{theTotal}} €</td>
+		<td>
+			<div class="ui small left action input">
+				<div class="ui teal icon button">
+					<i class="euro icon"></i>
+				</div>
+				
+				<input id="{{_id}}" type="text" name="payement" value="{{thePayement}}" {{isPaid}} />
+			</div>
+
+		</td>
+		<td>
+			<div class="ui toggle checkbox">
+				<input value="{{_id}}" type="checkbox" name="paid"  {{isChecked}}>				
+			</div>
+			{{{paid}}}
+		</td>
+	</tr>
+	{{/if}}
+
+	{{#if is "factureEdit"}}
+	<tr >
+		<td>{{theUserName}}</td>
+		{{#if isDesktop}}
+		<td class="right aligned">{{coffee}}</td>
+		<td class="right aligned">{{theDelta}} €</td>
+		<td class="right aligned">{{theAmount}} €</td>
+		{{/if}}
+		<td class="right aligned"><b>{{theTotal}} €</b></td>
+		<td>
+			<div class="ui small left action input">
+				<div class="ui teal icon button">
+					<i class="euro icon"></i>
+				</div>
+				<input id="{{_id}}" type="text" name="payement" value="{{thePayement}}" {{isPaid}} />
+			</div>     
+		</td>
+		<td class="{{paidClass}}">
+		<div class="ui toggle checkbox">
+			<input value="{{_id}}" type="checkbox" name="paid"  {{isChecked}}>				
+		</div>
+		{{{paid}}}</td>
+	</tr>
+	{{/if}}
 </template>
-
-

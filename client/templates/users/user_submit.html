@@ -1,26 +1,34 @@
 <template name="userSubmit">
-  <form class="main form">
-    <div class="form-group {{errorClass 'name'}}">
-      <label class="control-label" for="name">Nom</label>
-      <div class="controls">
-          <input name="name" id="name" type="text" value="" placeholder="Name your user" class="form-control"/>
-          <span class="help-block">{{errorMessage 'name'}}</span>
-      </div>
-    </div>
-    <div class="form-group {{errorClass 'email'}}">
-      <label class="control-label" for="email">email</label>
-      <div class="controls">
-          <input name="email" id="email" type="text" value="" placeholder="email of your user" class="form-control"/>
-          <span class="help-block">{{errorMessage 'email'}}</span>
-      </div>
-    </div>
-    <div class="form-group {{errorClass 'amount'}}">
-      <label class="control-label" for="amount">Nombre de café par jour</label>
-      <div class="controls">
-          <input name="amount" id="amount" type="text" value="" placeholder="nombre de café par jour" class="form-control"/>
-          <span class="help-block">{{errorMessage 'amount'}}</span>
-      </div>
-    </div>
-    <input type="submit" value="Creation" class="btn btn-primary"/>
-  </form>
+	<form class="ui form">
+		<h4 class="ui dividing header">Information</h4>
+		<div class="two fields">
+			<div class="field">
+				<input name="name" id="name" type="text" placeholder="Nom" value="{{name}}"/>
+			</div>
+			<div class="field">
+				<input name="firstname" id="firstname" type="text" placeholder="Prenom" value="{{firstname}}"/>
+			</div>
+		</div>
+
+		<div class="field">
+			<input name="email" id="email" type="text" value="{{email}}" placeholder="email" class="form-control"/>
+		</div>
+
+		<h4 class="ui dividing header">Compte</h4>
+
+		<div class="field">
+			<input name="amount" id="amount" type="text" placeholder="Nombre de café par jour" value="{{amount}}" class="form-control"/>
+		</div>
+		<div class="field">
+			<div class="ui checkbox">
+				<input name="killed" id="killed" type="checkbox" {{getKilled}}/>
+				<label>Désactivé</label>
+			</div>
+		</div>
+		<div>
+			<h4 class="ui dividing header"></h4>
+			<div class="ui submit button create">Creer</div>
+		</div>
+	</form>
+
 </template>

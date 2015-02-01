@@ -1,66 +1,31 @@
 <template name="factureEdit">
-  <div class="segment">
-      <div class="ui two column middle aligned relaxed fitted stackable grid">
-        <div class="column">
-          <div class="ui left action input">
-              <div class="ui teal icon button">
-                <i class="calendar icon"></i>
-              </div>
-              <input type="text" value="{{getDate}}">
-          </div>
-        </div>
-        <div class="column">
-          <div class="ui left action input">
-              <div class="ui teal icon button">
-                <i class="euro icon"></i>
-              </div>
-              <input type="text" value="{{getSums.totals}}">
-          </div>
-        </div>
-     </div>
-       <div class="ui divider"></div>
-      
-      <div class="segment">
-        <div class="ui left icon input">
-             <i class="users icon"></i>
-            <input type="text" name="nameSearchInput" id="nameSearchInput" placeholder="Rechercher ...">
-        </div>
 
-        <table class="ui celled table">
-            <thead>
-                <tr>
-                  <th>Name</th>
-                  <th># café</th>
-                  <th>Dettes</th>
-                  <th>Montant</th>
-                  <th>Total</th>
-                  <th>Paiement</th>
-                  <th>Status</th>
-                </tr>
-              </thead>
-              <tbody>
-                {{#each lines}}
-                    {{> factureLine}}
-                {{/each}}
-              </tbody>
-              <tfoot>
-                  <tr class="active">
-                      <td>Total</td>
-                      <td class="right aligned">{{getSums.coffees}}</td>
-                      <td class="right aligned">{{getSums.deltas}} €</td>
-                      <td class="right aligned">{{getSums.amounts}} €</td>
-                      <td class="right aligned"><b>{{getSums.totals}} €</b></td>
-                      <td></td>
-                      <td></td>
-                  </tr>
-              </tfoot>
-        </table>
-    </div>
+	<div class="segment">
+		{{> factureHeader date=getDate totals=getSums.totals }}
 
-      <div class="ui basic right aligned  segment">
-          <a class="ui green button sendEmail">Envois des emails</a>
-          <a class="ui yellow button closeBill">Fermer la facture</a>
-          <a class="ui right red button delete" href="#">Suppression de la facture</a>
-      </div>
-  </div>
+		<div class="ui divider"></div>
+		
+		<div class="segment">
+			<div class="ui left icon input">
+				<i class="users icon"></i>
+				<input type="text" name="nameSearchInput" id="nameSearchInput" placeholder="Rechercher ...">
+			</div>
+
+			<table class="ui small celled collapsing unstackable table">
+				{{ > factureTableHeader edit=true}}
+				<tbody>
+					{{#each lines}}
+					{{> factureLine}}
+					{{/each}}
+				</tbody>
+				{{ > factureTableFooter edit=true getSums=getSums}}
+			</table>
+		</div>
+
+		<div class="ui basic right aligned  segment">
+			<a class="ui green button sendEmail">Envois des emails</a>
+			<a class="ui yellow button closeBill">Fermer la facture</a>
+			<a class="ui right red button delete" href="#">Suppression de la facture</a>
+		</div>
+	</div>
 </template>

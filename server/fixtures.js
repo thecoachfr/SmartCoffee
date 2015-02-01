@@ -1,6 +1,15 @@
 
 var decemberBill;
 
+if (Settings.find().count() === 0) {
+	Settings.insert({
+		coffeePrice: 0.12,
+		daysInMonth: 22,
+		internalCost:1,
+		timestamp:new Date()
+	});
+}
+
 /*
 if (Factures.find().count() === 0) {
     decemberBill = Factures.insert({

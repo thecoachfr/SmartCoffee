@@ -1,0 +1,17 @@
+<template name="factureTableHeader">
+	<thead>
+		<tr>
+			<th>Name</th>
+			{{#if isDesktop}}
+			<th># café</th>	
+			<th>Dettes</th>
+			<th>Montant</th>
+			{{/if}}
+			<th>Total</th>
+			{{#if edit}}
+			<th>Paiement</th>
+			<th>Status</th>
+			{{/if}}
+		</tr>
+	</thead>
+</template>

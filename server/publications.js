@@ -9,3 +9,7 @@ Meteor.publish('lines', function() {
 Meteor.publish('coffeeUsers', function() { 
     return CoffeeUsers.find();
 });
+
+Meteor.publish('settings', function() { 
+    return Settings.find();
+});

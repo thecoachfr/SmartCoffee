@@ -1,65 +1,33 @@
 <template name="factureSubmit">
-  <form class="main form">
-    <div class="form-group">
-        <div class="input-group">
-            <span class="input-group-addon" id="basic-addon1">Mois</span>
-            <input type="text" name="month" id="month" value="{{getMonth}}" class="form-control" aria-describedby="basic-addon1" readonly >
-        </div>
-    </div>
-       <div class="form-group">
-        <div class="input-group">
-            <span class="input-group-addon" id="basic-addon1">Année</span>
-            <input type="text" name="year" id="year" value="{{getYear}}" class="form-control" aria-describedby="basic-addon1" readonly >
-        </div>
-    </div>
-    <div class="form-group">
-        <div class="input-group">
-            <span class="input-group-addon" id="basic-addon1">€</span>
-            <input type="text" name="amount" id="amount" value="{{theSum.total}}" class="form-control" aria-describedby="basic-addon1" readonly >
-        </div>
-    </div>
-      <div>
-        <div>
-            <table class="table">
-            <thead>
-                <tr>
-                  <th>Name</th>
-                  <th># café</th>
-                  <th>Delta</th>
-                  <th>Montant</th>
-                  <th>Total</th>
-                  <th>Paiement</th>
-                </tr>
-              </thead>
-              <tbody>
-                {{#each factureLines}}
-                     {{> candidateLine}}
-                {{/each}}
-              </tbody>
-              <tfoot>
-                  <tr>
-                      <td>Total</td>
-                      <td>{{theSums.coffees}}</td>
-                      <td></td>
-                      <td>{{theSums.amounts}} €</td>
-                      <td>{{theSums.totals}} €</td>
-                      <td></td>
-                  </tr>
-              </tfoot>
-        </table>
-        </div>
-      </div>
-    <input type="submit" value="Creation" class="btn btn-primary"/>
-  </form>
+	<div class="segment">
+		{{> factureHeader date=getDate totals=getSums.totals }}
+		<div class="ui divider"></div>
+		
+		<div class="segment">
+			<table class="ui small celled collapsing unstackable table">
+				{{ > factureTableHeader edit=false}}
+				<tbody>
+					{{#each lines}}
+					{{> candidateLine}}
+					{{/each}}
+				</tbody>
+				{{ > factureTableFooter edit=false getSums=getSums}}
+			</table>
+		</div>
+		<div class="ui basic right aligned  segment">
+			<a class="ui right green button createBill" href="#">Creation de la facture</a>
+		</div>
+	</div>
 </template>
 
 <template name="candidateLine">
-      <tr>
-        <td>{{name}}</td>
-        <td>{{amount}}</td>
-        <td>{{theSum.delta}} €</td>
-        <td>{{theSum.amount}} €</td>
-        <td>{{theSum.total}} €</td>
-        <td>{{theSum.paid}}</td>
-    </tr>
+	<tr >
+		<td>{{theUserName}}</td>
+		{{#if isDesktop}}
+		<td class="right aligned">{{amount}}</td>
+		<td class="right aligned">{{getSum.delta}} €</td>
+		<td class="right aligned">{{getSum.amount}} €</td>
+		{{/if}}
+		<td class="right aligned"><b>{{getSum.total}} €</b></td>
+	</tr>
 </template>

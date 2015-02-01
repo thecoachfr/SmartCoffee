@@ -12,5 +12,13 @@ accounts-password
 mrt:moment
 email
 service-configuration
-nooitaf:semantic-ui
+nooitaf:semantic-ui@1.8.0
 accounts-ui
+mystor:device-detection
+dburles:collection-helpers
+aldeed:collection2
+aldeed:autoform@4.2.2
+jameslefrere:autoform-semantic-ui
+matb33:collection-hooks
+mrt:moment-timezone
+rzymek:moment-locale-fr
