@@ -1,10 +1,10 @@
-Template.factureSubmit.created = function() { 
+Template.factureSubmit.created = function() {
 	Session.set('factureSubmitErrors', {});
-}
+};
 
 Template.factureSubmit.helpers({
 	errorMessage: function(field) {
-		return Session.get('factureSubmitErrors')[field]; 
+		return Session.get('factureSubmitErrors')[field];
 	},
 	errorClass: function (field) {
 		return !!Session.get('factureSubmitErrors')[field] ? 'has-error' : '';
@@ -29,10 +29,10 @@ Template.factureSubmit.helpers({
 			lastMonthDeltas += e.delta;
 			lastMonthAmounts += e.amount;
 		});
-		
+
 		var amounts = computeCoffeePrice(coffees);
-		return { 
-			coffees: coffees, 
+		return {
+			coffees: coffees,
 			amounts: amounts.toFixed(1),
 			deltas: lastMonthDeltas.toFixed(1),
 			totals: (lastMonthDeltas + lastMonthAmounts + amounts).toFixed(1)
@@ -40,7 +40,7 @@ Template.factureSubmit.helpers({
 	}
 });
 
-Template.factureSubmit.events({ 
+Template.factureSubmit.events({
 	'click .createBill': function(e) {
 		e.preventDefault();
 		var theDate = new Date();
@@ -52,16 +52,16 @@ Template.factureSubmit.events({
 			year: year,
         state: 1 // Open
     };
-    
-    Meteor.call('factureInsert', facture, function(error, result) { 
+
+    Meteor.call('factureInsert', facture, function(error, result) {
         // display the error to the user and abort
         if (error)
         	return throwError(error.reason);
-        
+
         // show this result but route anyway
         if (result.factureExists)
         	throwError('This bill already exists');
-        
+
         Router.go('factureEdit', {_id: result._id});
     });
 }
@@ -69,17 +69,17 @@ Template.factureSubmit.events({
 
 Template.candidateLine.helpers({
 	theUserName: function() {
-		return this.name + ' ' + this.firstname; 
+		return this.name + ' ' + this.firstname;
 	},
 	getSum: function() {
 		var lastMonthBill = findLastMonthBill();
 		var line = Lines.findOne({ coffeeUserId: this._id, factureId: lastMonthBill._id});
-		
+
 		var amount = computeCoffeePrice(this.amount);
 		var delta = computeDelta(line)
 		var total = delta + amount;
 		var paid = (total === 0)?"oui":"non";
-		
+
 		return {
 			delta: delta.toFixed(1),
 			total: total.toFixed(1),

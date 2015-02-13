@@ -1,0 +1,41 @@
+<template name="admin">
+  <div class="ui green button clearLog">Clear</div>
+
+  <div class="ui divider"></div>
+
+  <div class="ui basic aligned segment">
+    <h2 class="ui header">
+      <i class="filter icon"></i>
+      <div class="content">
+        Filters Logs
+        <div class="sub header">Filter logs by categories</div>
+      </div>
+    </h2>
+    <div class="ui basic buttons">
+      <div class="ui button {{activeAll}} filterAll">All</div>
+      <div class="ui button {{activeMessage}} filterMessage">Message</div>
+      <div class="ui button {{activeWarning}} filterWarning">Warning</div>
+      <div class="ui button {{activeError}} filterError">Error</div>
+    </div>
+  </div>
+
+  <div class="ui segment">
+    <div class="ui divided items">
+      {{#each logs}}
+      {{> log}}
+      {{/each}}
+    </div>
+  </div>
+</template>
+
+<template name="log">
+  <div class="item">
+    <div class="content">
+      <div class="header">{{{getComponent}}} {{getDate}}</div>
+
+      <div class="description">
+        {{{getLevel}}} {{text}}
+      </div>
+    </div>
+  </div>
+</template>

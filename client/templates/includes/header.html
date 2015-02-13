@@ -3,7 +3,10 @@
 		<div class="menu">
 			<a class="{{activeIfTemplateIs 'facturesList'}} item" href="{{pathFor 'facturesList'}}"><i class="coffee icon"></i>Factures</a>
 			<a class="{{activeIfTemplateIs 'usersList'}} item" href="{{pathFor 'usersList'}}"><i class="users icon"></i>Utilisateurs</a>
-				<a class="{{activeIfTemplateIs 'settings'}} item" href="{{pathFor 'settings'}}"><i class="settings icon"></i>Reglages</a>
+			{{#if isInRole 'admin'}}
+			<a class="{{activeIfTemplateIs 'settings'}} item" href="{{pathFor 'settings'}}"><i class="settings icon"></i>Reglages</a>
+			<a class="{{activeIfTemplateIs 'admin'}} item" href="{{pathFor 'admin'}}"><i class="settings icon"></i>Admin</a>
+			{{/if}}
 			<div class="item"> {{> loginButtons}}</div>
 		</div>
 	</div>

@@ -1,8 +1,10 @@
 <template name="usersList">
+	{{#if isInRole 'admin'}}
 	<div class="ui basic aligned segment">
 		<a class="ui green button createUser">création utilisateur</a>
-	</div> 
+	</div>
 	<div class="ui divider"></div>
+	{{/if}}
 	<div class="segment">
 		<div class="ui left icon input">
 			<i class="users icon"></i>

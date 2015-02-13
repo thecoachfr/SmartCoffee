@@ -1,8 +1,10 @@
 <template name="facturesList">
+	{{#if isInRole 'admin'}}
 	<div class="ui basic aligned segment">
 		<a class="ui green button createBill">creation facture</a>
 	</div>
 	<div class="ui divider"></div>
+	{{/if}}
 	<div class="ui divided items">
 		{{#each factures}}
 		{{> factureItem}}

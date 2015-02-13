@@ -1,4 +1,31 @@
 <template name="userSubmit">
+	<div class="ui segment">
+		<div class="ui red button readContacts">read contacts</div>
+	</div>
+
+	<div class="ui segment">
+		{{> esInput index="googleContacts" placeholder="Search..." }}
+	</div>
+
+	{{#ifEsInputIsEmpty index="googleContacts"}}
+	<div>Search in google contacts</div>
+	{{/ifEsInputIsEmpty}}
+
+	{{#ifEsIsSearching index="googleContacts"}}
+	<div>Loading...</div>
+	{{else}}
+	<div class="ui cards">
+		{{#esEach index="googleContacts"}}
+		{{> contactItem}}
+		{{/esEach}}
+	</div>
+	{{> esLoadMoreButton index="googleContacts"}}
+	{{/ifEsIsSearching}}
+
+	{{#ifEsHasNoResults index="googleContacts"}}
+	<div class="no-results">No results found!</div>
+	{{/ifEsHasNoResults}}
+
 	<form class="ui form">
 		<h4 class="ui dividing header">Information</h4>
 		<div class="two fields">
@@ -30,5 +57,28 @@
 			<div class="ui submit button create">Creer</div>
 		</div>
 	</form>
+</template>
+
+<template name="contactItem">
+
+	<div class="card">
+		<div class="image">
+			<img src="{{this.dataImg}}">
+		</div>
+		<div class="content">
+			<div class="header">{{givenName}} {{familyName}}</div>
+			<div class="meta">
+				<a class="email">{{email}}</a>
+			</div>
+			<div class="description">
+				<a class="group">{{fullName}}</a>
+			</div>
+		</div>
+
+		<div class="ui bottom attached button addContact">
+			<i class="add icon"></i>
+			Ajouter
+		</div>
+	</div>
 
 </template>
