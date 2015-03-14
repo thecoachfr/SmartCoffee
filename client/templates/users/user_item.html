@@ -1,7 +1,7 @@
 <template name="userItem">
 	<div class="card" >
 		<div class="content">
-			<a class="header" href="{{pathFor 'userEdit'}}">{{name}} {{firstname}}</a>
+			<a class="header" href="{{pathFor 'userEdit'}}">{{{dataImg}}} {{name}} {{firstname}}</a>
 			<div class="meta">
 				<span class="email">{{email}}</span>
 			</div>
@@ -11,8 +11,8 @@
 			<a class="ui corner label">
 				{{{state}}}
 			</a>
-		</div>
 
+		</div>
 		<div class="ui bottom attached red tiny button">
 			<i class="delete icon"></i>
 			Supprimer

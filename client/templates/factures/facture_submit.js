@@ -14,12 +14,12 @@ Template.factureSubmit.helpers({
 		return moment(date).format("MMMM YYYY");
 	},
 	lines: function() {
-		var lines = CoffeeUsers.find({ killed: 0 }, { sort: { name:1}});
+		var lines = CoffeeUsers.find({ killed: false }, { sort: { name:1}});
 		return lines;
 	},
 	getSums: function() {
 		var coffees = 0.0;
-		CoffeeUsers.find({ killed: 0 }).map(function(e) {
+		CoffeeUsers.find({ killed: false }).map(function(e) {
 			coffees += e.amount;
 		});
 		var lastMonthDeltas = 0.0;
@@ -76,7 +76,7 @@ Template.candidateLine.helpers({
 		var line = Lines.findOne({ coffeeUserId: this._id, factureId: lastMonthBill._id});
 
 		var amount = computeCoffeePrice(this.amount);
-		var delta = computeDelta(line)
+		var delta = computeDelta(line);
 		var total = delta + amount;
 		var paid = (total === 0)?"oui":"non";
 

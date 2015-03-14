@@ -50,82 +50,98 @@ validateAndAddGContact = function(user, email) {
 };
 
 Meteor.methods({
-  readContacts : function() {
+  readContacts: function() {
     var gcontacts = getContacts();
+    Future = Npm.require('fibers/future');
 
-    insertContacts = function(err, contacts) {
-      if (err) {
-        logError(err);
-      }
+    var future = new Future(); // 1
 
-      var added = 0;
+    gcontacts.refreshAccessToken(Meteor.user().services.google.refreshToken,
+    function (err, accessToken) { //2
+      future["return"]({err: err, accessToken: accessToken}); // 4
+    });
 
-      contacts.forEach(function (user) {
+    var result = future.wait(); // 3, 5
+    if (result.err && result.err !== null) { // 6
+      logError('gcontact.refreshToken, ', result.err);
+      return false;
+    } else {
+      logInfo('gcontact.access token success!');
+      gcontacts.token = result.accessToken;
 
-        if (user.email) {
-          if (validateAndAddGContact(user, user.email))
-          added++;
-        } else {
-          // no main email
-          logInfo("reject " + user.fullName);
-          if (user.emails) {
-            user.emails.forEach(function (email) {
-              logInfo(" - scaning " + email.email);
-              if (validateAndAddGContact(user, email.email))
+      var future2 = new Future(); // 1
+      gcontacts.getContacts( function (err, contacts) { //2
+        future2["return"]({err: err, contacts: contacts}); // 4
+      });
+
+      var result2 = future2.wait(); // 3, 5
+      if (result2.err && result2.err !== null) { // 6
+        logError('gcontact.refreshToken, ', result2.err);
+        return false;
+      } else {
+        logInfo('Contacts OK');
+        var added = 0;
+        result2.contacts.forEach(function (user) {
+          if (user.email) {
+            if (validateAndAddGContact(user, user.email)) {
               added++;
-            });
+            }
+          } else {
+            //logInfo("reject " + user.fullName);
+            if (user.emails) {
+              user.emails.forEach(function (email) {
+                // logInfo(" - scaning " + email.email);
+                if (validateAndAddGContact(user, email.email)) {
+                  added++;
+                }
+              });
+            }
           }
-        }
-      });
-
-      logInfo('reading ' + contacts.length + ' contacts, ' + added + ' added.');
-    };
-
-    localLogError = function(e) {
-      logError("error " + e.stack);
-    };
-
-    mbINsertContacts = Meteor.bindEnvironment(insertContacts, localLogError);
-
-    mbLogError = Meteor.bindEnvironment(function(msg) {
-      logError('gcontact.refreshToken, ' + msg);
-    }, localLogError);
-
-    mbLogMessage = Meteor.bindEnvironment(function(msg) {
-      logInfo(msg);
-    }, localLogError);
-
-    logInfo('before gContacts refreshaccess token');
-
-    try {
-      var res = gcontacts.refreshAccessToken(Meteor.user().services.google.refreshToken, function (err, accessToken)
-      {
-        if(err)
-        {
-          //console.log('gcontact.refreshToken, ' + err);
-          fnError(err);
-          return false;
-        }
-        else
-        {
-          fnMessage('gcontact.access token success!');
-          //logInfo('gcontact.access token success!');
-
-          gcontacts.token = accessToken;
-          gcontacts.getContacts(fn);
-        }
-      });
-      if (!res) {
-        logError('Something goes wrong');
+        });
+        logInfo('reading ' + result2.contacts.length + ' contacts, ' + added + ' added.');
+        return true;
       }
-    } catch(err) {
-      logError(err);
     }
   },
   readPhoto: function(id) {
     var gcontacts = getContacts();
     var user = GContacts.findOne({ _id: id });
 
+    var future = new Future(); // 1
+
+    gcontacts.refreshAccessToken(Meteor.user().services.google.refreshToken,
+    function (err, accessToken) { //2
+      future["return"]({err: err, accessToken: accessToken}); // 4
+    });
+
+    var result = future.wait(); // 3, 5
+    if (result.err && result.err !== null) { // 6
+      logError('gcontact.refreshToken, ', result.err);
+      return false;
+    } else {
+      logInfo('gcontact.access token success!');
+      gcontacts.token = result.accessToken;
+
+      var future2 = new Future(); // 1
+      gcontacts.getPhoto(user.photoUrl, function (err, res) { //2
+        future2["return"]({err: err, photo: res}); // 4
+      });
+
+      var result2 = future2.wait(); // 3, 5
+      if (result2.err && result2.err !== null) { // 6
+        logError('gcontact.refreshToken, ', result2.err);
+        return false;
+      } else {
+        logInfo('Photo OK ');
+        user.dataImg = "data:image/png;base64," + btoa(result2.photo);
+        GContacts.update(user._id, {$set: {dataImg: user.dataImg} }, function(err) {
+          if (err)
+          logError('error  ' + user.name + ' ' + err);
+        });
+      }
+    }
+  },
+        /*
     fn = Meteor.bindEnvironment(function (err, res) {
       if (!err) {
         user.dataImg = "data:image/png;base64," + btoa(res);
@@ -154,7 +170,7 @@ Meteor.methods({
         gcontacts.getPhoto(user.photoUrl, fn);
       }
     });
-  },
+  },*/
   getDetail: function(id) {
     var gcontacts = getContacts();
 

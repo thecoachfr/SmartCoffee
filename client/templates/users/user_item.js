@@ -3,14 +3,21 @@ Template.userItem.helpers({
 		return Meteor.user() && (Meteor.user().username === 'admin');
 	},
 	getState: function () {
-		if (this.killed === 0) return 'actif';
+		if (this.killed === false) return 'actif';
 		return 'désactivé';
 	},
 	state: function() {
-		return (this.killed === 0)?"<i class='blue flag icon'></i>":"<i class='red flag icon'></i>";
+		return (this.killed === false)?"<i class='blue flag icon'></i>":"<i class='red flag icon'></i>";
 	},
 	coffee: function() {
 		return "<span class='badge'>" + this.amount + " café(s)/jour</span>";
+	},
+	dataImg: function() {
+		var gContact = GContacts.findOne({ _id: this.gContactId });
+		if (gContact)
+			return '<img class="ui avatar image" src="'+gContact.dataImg+'">';
+		else
+		  return '';
 	}
 });
 

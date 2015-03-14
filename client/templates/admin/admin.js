@@ -50,6 +50,11 @@ Template.admin.events({
   'click .clearLog': function(e) {
     e.preventDefault();
     Meteor.call('clearLogs');
+  },
+  'click .update': function(e) {
+    e.preventDefault();
+    console.log('update');
+    Meteor.call('update');
   }
 });
 

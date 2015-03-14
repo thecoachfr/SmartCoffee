@@ -23,6 +23,16 @@ Template.userEdit.helpers({
 		});
 		return !paid;
 	},
+	hasFactureLine: function() {
+		return this.lines().count() > 0;
+	},
+	dataImg: function() {
+		var gContact = GContacts.findOne({ _id: this.gContactId });
+		if (gContact)
+			return gContact.dataImg;
+		else
+		  return null;
+	}
 });
 
 Template.userEdit.events({
@@ -58,6 +68,23 @@ Template.userEdit.events({
 			CoffeeUsers.remove(currentUserId);
 			Router.go('usersList');
 		}
+	},
+	'click .addToCurrentBill': function(e) {
+		e.preventDefault();
+		var user = this;
+		var factureId = Factures.findOne({}, {sort: {submitted: -1}})._id;
+		var line = {
+			factureId: factureId,
+			coffeeUserId: user._id,
+			coffee: user.amount,
+			amount: computeCoffeePrice(user.amount),
+			delta: 0,
+			payement: 0.0,
+			paid: false ,
+			reminder : 0
+		};
+		Lines.insert(line);
+		console.log(line);
 	},
 	'click .sendEmail': function(e) {
 		e.preventDefault();

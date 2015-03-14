@@ -1,7 +1,6 @@
 Template.usersList.created = function() {
 	Session.set('user_search', '');
-}
-
+};
 
 Template.usersList.helpers({
 	users: function() {

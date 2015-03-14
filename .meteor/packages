@@ -12,7 +12,6 @@ accounts-password
 mrt:moment
 email
 service-configuration
-nooitaf:semantic-ui@1.8.0
 accounts-ui
 mystor:device-detection
 dburles:collection-helpers
@@ -25,4 +24,4 @@ rzymek:moment-locale-fr
 alanning:roles
 accounts-google
 matteodem:easy-search
-deanius:promise
+semantic:ui-css

@@ -1,17 +1,24 @@
 <template name="userEdit">
 	<form class="ui form">
 		<h4 class="ui dividing header">Information</h4>
-		<div class="two fields">
-			<div class="field">
-				<input name="name" id="name" type="text" placeholder="Nom" value="{{name}}"/>
-			</div>
-			<div class="field">
-				<input name="firstname" id="firstname" type="text" value="{{firstname}}"/>
-			</div>
-		</div>
 
-		<div class="field">
-			<input name="email" id="email" type="text" value="{{email}}" class="form-control"/>
+		<div class="ui two column grid">
+			<div class="two wide column">
+				<img class="ui tiny circular image" src="{{dataImg}}">
+			</div>
+			<div class="fourteen wide column">
+				<div class="two fields">
+					<div class="field">
+						<input name="name" id="name" type="text" placeholder="Nom" value="{{name}}"/>
+					</div>
+					<div class="field">
+						<input name="firstname" id="firstname" type="text" value="{{firstname}}"/>
+					</div>
+				</div>
+				<div class="field">
+					<input name="email" id="email" type="text" value="{{email}}" class="form-control"/>
+				</div>
+			</div>
 		</div>
 
 		<h4 class="ui dividing header">Compte</h4>
@@ -19,7 +26,7 @@
 		<div class="field">
 			<input name="amount" id="amount" type="text" placeholder="# cafe" value="{{amount}}" class="form-control"/>
 		</div>
-		
+
 		<div class="field">
 			<div class="ui checkbox">
 				<input name="killed" id="killed" type="checkbox" {{getKilled}}/>
@@ -27,7 +34,8 @@
 			</div>
 		</div>
 		<div>
-			<h4 class="ui dividing header"></h4>
+			<h4 class="ui dividing header">Facture</h4>
+			{{#if hasFactureLine}}
 			<table class="ui table">
 				<thead>
 					<tr>
@@ -46,11 +54,14 @@
 					{{/each}}
 				</tbody>
 			</table>
+			{{else}}
+			<a class="ui green button addToCurrentBill">Ajouter a la facture courante</a>
+			{{/if}}
 		</div>
 		<h4 class="ui dividing header"></h4>
 		<div class="ui submit button">Modifier</div>
 		{{#if hasUnpaid}}
-			<a class="ui green button sendEmail">Envois email</a>
+		<a class="ui green button sendEmail">Envois email</a>
 		{{/if}}
 		<a class="ui red button" href="#">Supprimer</a>
 	</form>
